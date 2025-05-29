@@ -79,8 +79,8 @@ export default function(){
     group('Validacion de tiempos de respuesta', () => {
         if(respuesta.status === 200) {
             check(respuesta, {
-                'El tiempo de respuesta es menor a 20000ms': (r) => r.timings.duration < 400,
-                'El tiempo de espera es menor a 2000ms': (r) => r.timings.waiting < 400,
+                'El tiempo de respuesta es menor a 400ms': (r) => r.timings.duration < 400,
+                'El tiempo de espera es menor a 400ms': (r) => r.timings.waiting < 400,
                 'El tiempo de envio es menor a 50ms': (r) => r.timings.sending < 50,
                 'El tiempo de recepcion es menor a 100ms': (r) => r.timings.receiving < 100,
             })
