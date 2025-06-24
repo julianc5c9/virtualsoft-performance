@@ -1,40 +1,14 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clonar repositorio') {
+        stage('Performance Testing') {
             steps {
-                git 'https://github.com/julianc5c9/virtualsoft-performance.git'
-            }
-        }
-
-        stage('Instalar dependencias') {
-            steps {
-                // Si usas npm para tus pruebas K6
-                sh 'npm install'
-            }
-        }
-
-        stage('Ejecutar pruebas K6') {
-            steps {
-                // Reemplaza con tu comando de ejecución de K6
+                echo 'Installing k6'
+                sh 'sudo chmod +x setup_k6.sh'
+                sh 'sudo ./setup_k6.sh'
+                echo 'Running K6 performance tests...'
                 sh 'k6 run validacion.js'
             }
         }
-
-        stage('Generar informe') {
-            steps {
-                // Opcional: Generar un informe con los resultados de las pruebas
-                script {
-                    try {
-                        sh 'k6 run --out json=report.json validacion.js'
-                        // Aquí podrías procesar el reporte JSON para generar un informe más detallado
-                    } catch (err) {
-                        echo "Error al generar el informe: ${err}"
-                    }
-                }
-            }
-        }
-
     }
 }
