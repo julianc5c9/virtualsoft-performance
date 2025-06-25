@@ -36,7 +36,7 @@ export const options = {
 };
 
 export default function(){
-    const respuesta = http.get('https://qa.virtualcore.co/front/v1/')
+    const respuesta = http.get('https://dev.virtualcore.co/front/v1/')
     console.log(`El tamaño de la pagina es: ${respuesta.body.length}, bytes`)
 
     const contentOK = respuesta.json('texto') === 'Regístrate'
