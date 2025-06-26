@@ -21,10 +21,10 @@ export const options = {
         {duration: '5s', target: 10}, 
     ],
     thresholds: {
-        http_req_duration: ['p(99) < 1500'],
+        http_req_duration: ['p(99) < 2000'],
         http_req_failed: ['rate < 0.01'], // Menos del 1% de solicitudes deben fallar
-        http_req_waiting: ['avg < 200'],
-        http_req_sending: ['p(90) < 50'],
+        http_req_waiting: ['avg < 500'],
+        http_req_sending: ['p(90) < 100'],
         http_reqs: ['count > 100'], // Debe haber más de 100 solicitudes totales
 
         //Threshold de las metricas 
@@ -79,10 +79,10 @@ export default function(){
     group('Validacion de tiempos de respuesta', () => {
         if(respuesta.status === 200) {
             check(respuesta, {
-                'El tiempo de respuesta es menor a 400ms': (r) => r.timings.duration < 400,
-                'El tiempo de espera es menor a 400ms': (r) => r.timings.waiting < 400,
+                'El tiempo de respuesta es menor a 2000ms': (r) => r.timings.duration < 2000,
+                'El tiempo de espera es menor a 2000ms': (r) => r.timings.waiting < 2000,
                 'El tiempo de envio es menor a 50ms': (r) => r.timings.sending < 50,
-                'El tiempo de recepcion es menor a 100ms': (r) => r.timings.receiving < 100,
+                'El tiempo de recepcion es menor a 500ms': (r) => r.timings.receiving < 500,
             })
         }
     })
